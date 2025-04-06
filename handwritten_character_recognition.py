@@ -6,12 +6,12 @@ from tensorflow.keras import layers
 from sklearn.model_selection import train_test_split # <<< CHANGE >>> For splitting custom data
 from sklearn.metrics import classification_report, confusion_matrix
 import seaborn as sns
-import os # <<< CHANGE >>> To interact with file system
-import pathlib # <<< CHANGE >>> For easier path handling
+import os #  To interact with file system
+import pathlib #  For easier path handling
 
-# <<< CHANGE >>> Define parameters for your custom dataset
-# <<< MUST MODIFY THESE >>>
-dataset_path = '/kaggle/input/mnistasjpg' # Path to the directory containing A/, B/, etc. folders
+#  Define parameters for your custom dataset
+# 
+dataset_path = '/kaggle/input/mnistasjpg' # 
 img_height = 28  # Target image height (choose a size, e.g., 28 or 32)
 img_width = 28   # Target image width
 num_channels = 1 # 1 for grayscale, 3 for RGB (adjust if needed)
@@ -103,13 +103,13 @@ print(f"Final shapes: x_train={x_train.shape}, y_train_cat={y_train_cat.shape}, 
 
 
 # 2. Build the CNN Model
-# <<< CHANGE >>> Use image dimensions and number of classes from custom data
+# Use image dimensions and number of classes from custom data
 input_shape = (img_height, img_width, num_channels)
 
 print("\nBuilding CNN model...")
 model = keras.Sequential(
     [
-        keras.Input(shape=input_shape), # <<< CHANGE >>> Adapted input shape
+        keras.Input(shape=input_shape), #  Adapted input shape
         # --- You might need to adjust the CNN architecture based on image size/complexity ---
         layers.Conv2D(32, kernel_size=(3, 3), activation="relu"),
         layers.MaxPooling2D(pool_size=(2, 2)),
@@ -118,7 +118,7 @@ model = keras.Sequential(
         # Add more Conv/Pooling layers if needed for larger images or more complex chars
         layers.Flatten(),
         layers.Dropout(0.5),
-        layers.Dense(num_classes, activation="softmax"), # <<< CHANGE >>> Adapted output neurons
+        layers.Dense(num_classes, activation="softmax"), #  Adapted output neurons
     ]
 )
 
@@ -186,8 +186,8 @@ y_pred_classes = np.argmax(y_pred_proba, axis=1) # Get predicted integer class i
 
 print("\nClassification Report:")
 # Use integer test labels (y_test_int) and provide class names
-# <<< CHANGE >>> Use custom class_names
-# <<< FIX >>> Add the 'labels' parameter and 'zero_division'
+#  Use custom class_names
+#  Add the 'labels' parameter and 'zero_division'
 print(classification_report(
     y_test_int,
     y_pred_classes,
